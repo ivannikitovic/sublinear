@@ -2,6 +2,15 @@ from typing import List
 from .hash_generator import HashGenerator
 
 class CountMinSketch():
+    """
+    The count-min sketch (CMS) is a probabilistic data structure
+    that serves as a frequency table of events in a stream of data.
+    It uses hash functions to map events to frequencies, 
+    but unlike a hash table uses only sub-linear space, at the expense
+    of overcounting some events due to collisions. 
+    The count-min sketch was invented in 2003 by Graham Cormode and 
+    S. Muthu Muthukrishnan and described by them in a 2005 paper.
+    """
 
     def __init__(self, K: int, N: int, i_dim: int = 128, i_len: int = 32) -> None:
         """
