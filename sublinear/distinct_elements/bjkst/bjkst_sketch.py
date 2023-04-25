@@ -1,7 +1,6 @@
 import math
 from typing import List
 from sublinear.utils.hash_generator import HashGenerator
-
 from sublinear.utils.zeros import Zeros
 
 class BJKSTSketch:
@@ -15,7 +14,7 @@ class BJKSTSketch:
     The BJKST algorithm was invented by Bar-Yossef, Jayram, Kumar, Sivakumar, and Trevisan.
     """
 
-    def __init__(self, n: int, b: float, c: float, epsilon: float):
+    def __init__(self, n: int, b: float, c: float, epsilon: float, max_input_length: int = 64):
         """
         Initializes BJKST Sketch class.
 
@@ -24,19 +23,32 @@ class BJKSTSketch:
         n: int
             Size of the input universe.
 
+        b: float
+            Constant factor for controlling the hash function range of g.
+
         c: float
             Constant factor for size of set B.
 
         epsilon: float
             Approximation error factor.
+
+        max_input_length: int, optional
+            Maximum length of the input elements, used for generating hash functions.
         """
         self.n = n
         self.b = b
         self.c = c
         self.epsilon = epsilon
+
         self.z = 0
         self.B = set()
-        self.g_size = int(b * n * (epsilon ** (-4)) * (math.log(n) ** 2))
+
+        self.h_generator = HashGenerator(self.n, max_input_length, m=n)
+        self.h = self.h_generator.generate_hash_function()
+
+        g_size = int(b * n * (epsilon ** (-4)) * (math.log(n) ** 2))
+        self.g_generator = HashGenerator(self.n, max_input_length, m=g_size)
+        self.g = self.g_generator.generate_hash_function()
 
     def process_stream(self, stream: List[object]) -> None:
         """
@@ -48,27 +60,15 @@ class BJKSTSketch:
             Stream of objects represented as a list.
         """
         for token in stream:
-            h_j = HashGenerator.hash_sha256(token, self.n)
+            h_j = self.h_generator.hash(token)
             zeros_hj = Zeros.zeros(h_j)
             if zeros_hj >= self.z:
-                g_j = HashGenerator.hash_sha256(token, self.g_size) 
+                g_j = self.g_generator.hash(token) 
                 self.B.add((g_j, zeros_hj))
 
                 while len(self.B) >= self.c / (self.epsilon ** 2):
                     self.z += 1
                     self.B = {(a, b) for (a, b) in self.B if b >= self.z}
-
-    # def process_stream(self, stream: List[object]) -> None:
-    #     for token in stream:
-    #         h_j = self.h_generator.hash(token)
-    #         zeros_hj = self.zeros(h_j)
-    #         if zeros_hj >= self.z:
-    #             g_j = self.g_generator.hash(token)
-    #             self.B.add((g_j, zeros_hj))
-
-    #             while len(self.B) >= self.c / (self.epsilon ** 2):
-    #                 self.z += 1
-    #                 self.B = {(a, b) for (a, b) in self.B if b >= self.z}
 
     def estimate_distinct_elements(self) -> int:
         """

@@ -4,7 +4,7 @@ from ..bjkst_sketch import BJKSTSketch
 
 def test_bjkst():
 
-    n = 100
+    n = 128
     b = 10
     c = 576
     epsilon = 0.1
@@ -13,7 +13,7 @@ def test_bjkst():
 
     test1 = []
 
-    for i in range(1000):
+    for i in range(100):
         test1 += i * [f"word{i}"]
 
     bjkst.process_stream(test1)
