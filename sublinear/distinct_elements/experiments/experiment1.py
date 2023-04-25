@@ -13,7 +13,7 @@ def test_bjkst():
 
     test1 = []
 
-    for i in range(100):
+    for i in range(1000):
         test1 += i * [f"word{i}"]
 
     bjkst.process_stream(test1)
