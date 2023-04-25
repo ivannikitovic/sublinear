@@ -1,8 +1,9 @@
+import hashlib
 from math import sqrt
 import random
 from typing import List
 
-class HashGeneratorBJKST():
+class HashGenerator():
 
     def __init__(self, n: int, k:int, m: int, p: int = None) -> None:
         """ 
@@ -77,4 +78,27 @@ class HashGeneratorBJKST():
 
         z_a = sum(map(lambda x: x[0] * x[1], zip(self.z, emb[:self.k])))
 
-        return (z_a % self.p) + 1
+        return  (z_a % self.p) % self.m
+    
+    @staticmethod
+    def hash_sha256(s: str, m: int) -> int:
+        """
+        Hashes the input string using the SHA-256 algorithm and maps the result to a specified range.
+
+        Parameters
+        ----------
+        s: str
+            Input string to be hashed.
+        m: int
+            The size of the output range, where the hash value will be mapped to an integer in [0, m).
+
+        Returns
+        -------
+        int
+            The hash value of the input string modulo m, an integer in the range [0, m).
+        """
+        s = s.encode()  # Convert the string to bytes
+        hash_object = hashlib.sha256()
+        hash_object.update(s)
+        hash_value = int(hash_object.hexdigest(), 16)  # Convert the hex digest to an integer
+        return hash_value % m

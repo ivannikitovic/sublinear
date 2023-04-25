@@ -1,8 +1,8 @@
 import math
 from typing import List
-import hashlib
+from sublinear.utils.hash_generator import HashGenerator
 
-from .hash_generator import HashGeneratorBJKST
+from sublinear.utils.zeros import Zeros
 
 class BJKSTSketch:
     """
@@ -38,49 +38,6 @@ class BJKSTSketch:
         self.B = set()
         self.g_size = int(b * n * (epsilon ** (-4)) * (math.log(n) ** 2))
 
-    @staticmethod
-    def zeros(p: int) -> int:
-        """
-        Returns the number of trailing zeros in the binary representation of p.
-
-        Parameters
-        ----------
-        p: int
-            Input integer.
-
-        Returns
-        -------
-        int
-            Number of trailing zeros in the binary representation of p.
-        """
-        count = 0
-        while p % 2 == 0 and p > 0:
-            count += 1
-            p = p // 2
-        return count
-
-    def sha256_hash(self, s: str, m: int) -> int:
-        """
-        Hashes the input string using the SHA-256 algorithm and maps the result to a specified range.
-
-        Parameters
-        ----------
-        s: str
-            Input string to be hashed.
-        m: int
-            The size of the output range, where the hash value will be mapped to an integer in [0, m).
-
-        Returns
-        -------
-        int
-            The hash value of the input string modulo m, an integer in the range [0, m).
-        """
-        s = s.encode()  # Convert the string to bytes
-        hash_object = hashlib.sha256()
-        hash_object.update(s)
-        hash_value = int(hash_object.hexdigest(), 16)  # Convert the hex digest to an integer
-        return hash_value % m
-
     def process_stream(self, stream: List[object]) -> None:
         """
         Executes the BJKST algorithm on a stream (list) of elements.
@@ -91,10 +48,10 @@ class BJKSTSketch:
             Stream of objects represented as a list.
         """
         for token in stream:
-            h_j = self.sha256_hash(token, self.n)
-            zeros_hj = self.zeros(h_j)
+            h_j = HashGenerator.hash_sha256(token, self.n)
+            zeros_hj = Zeros.zeros(h_j)
             if zeros_hj >= self.z:
-                g_j = self.sha256_hash(token, self.g_size) 
+                g_j = HashGenerator.hash_sha256(token, self.g_size) 
                 self.B.add((g_j, zeros_hj))
 
                 while len(self.B) >= self.c / (self.epsilon ** 2):

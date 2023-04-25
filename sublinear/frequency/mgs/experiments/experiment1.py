@@ -2,7 +2,7 @@
 
 from ..misra_gries_sketch import MisraGriesSketch
 
-def test_heavy_hitters():
+def test_mgs():
     
     mgs = MisraGriesSketch(10)  # Frequency threshold 10
 

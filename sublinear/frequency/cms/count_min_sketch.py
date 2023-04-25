@@ -1,5 +1,5 @@
 from typing import List
-from .hash_generator import HashGenerator
+from ...utils.hash_generator import HashGenerator
 
 class CountMinSketch():
     """
