@@ -3,7 +3,7 @@
 from ..cms_text import CMS_Text
 import os
 
-if __name__ == "__main__":
+def test_cms_2():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     relative_path = "../data/romeo-and-juliet.txt"
     file_path = os.path.join(current_dir, relative_path)

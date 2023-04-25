@@ -2,8 +2,8 @@
 
 from ..misra_gries_sketch import MisraGriesSketch
 
-if __name__ == "__main__":
-
+def test_heavy_hitters():
+    
     mgs = MisraGriesSketch(10)  # Frequency threshold 10
 
     test1 = []

@@ -2,7 +2,7 @@
 
 from ..count_min_sketch import CountMinSketch
 
-if __name__ == "__main__":
+def test_cms_1():
 
     cms = CountMinSketch(50, 3) # 50 * 3
 
