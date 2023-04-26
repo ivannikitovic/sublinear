@@ -14,7 +14,7 @@ class AMSSketch1:
     as the square of this counter.
     """
 
-    def __init__(self, n: int, max_input_length: int = 64) -> None:
+    def __init__(self, n: int) -> None:
         """
         Initializes the AMS-F2-Estimate class.
 
@@ -22,14 +22,11 @@ class AMSSketch1:
         ----------
         n: int
             Size of the input universe.
-
-        max_input_length: int, optional
-            Maximum length of the input elements, used for generating hash functions.
         """
         self.n = n
         self.z = 0
 
-        self.h_generator = HashGenerator(self.n, max_input_length, m=2)
+        self.h_generator = HashGenerator(self.n, k=4, m=2)
         self.h = self.h_generator.generate_hash_function()
 
     def process_stream(self, stream: List[object]) -> None:
