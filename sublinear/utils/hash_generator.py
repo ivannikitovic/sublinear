@@ -62,7 +62,7 @@ class HashGenerator():
         self.z = [random.randint(0, self.p - 1) for i in range(self.k)]
         return self.z
 
-    def hash(self, s: str) -> int:
+    def hash_string(self, s: str) -> int:
         """
         Hashes input string as follows:
         h(a1, ..., ak) = (SUM_overall_zs zi * ai) mod p
@@ -79,6 +79,20 @@ class HashGenerator():
         z_a = sum(map(lambda x: x[0] * x[1], zip(self.z, emb[:self.k])))
 
         return  (z_a % self.p) % self.m
+
+    def hash_integer(self, num: int) -> int:
+        """
+        Hashes an input integer as follows:
+        h(x) = (SUM_overall_zs zi * x^i) mod p
+
+        Parameters
+        ----------
+        num: int
+            Input integer to be hashed.
+        """
+        z_a = sum(z_i * (num ** i) for i, z_i in enumerate(self.z))
+
+        return (z_a % self.p) % self.m
     
     @staticmethod
     def hash_sha256(s: str, m: int) -> int:

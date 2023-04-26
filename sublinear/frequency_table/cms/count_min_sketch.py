@@ -58,7 +58,7 @@ class CountMinSketch():
         """
         for value in stream:
             for i in range(self.N):
-                bucket = self.hash_generators[i].hash(value)
+                bucket = self.hash_generators[i].hash_string(value)
                 self.sketch[i][bucket] += 1
 
     def get_freq(self, values: List[object]) -> List[int]:
@@ -77,7 +77,7 @@ class CountMinSketch():
         for val_idx in range(l):
             if values[val_idx] not in self.frequencies:
                 self.frequencies[values[val_idx]] = \
-                min([self.sketch[i][self.hash_generators[i].hash(values[val_idx])] \
+                min([self.sketch[i][self.hash_generators[i].hash_string(values[val_idx])] \
                       for i in range(self.N)])
 
         return self.frequencies

@@ -60,10 +60,10 @@ class BJKSTSketch:
             Stream of objects represented as a list.
         """
         for token in stream:
-            h_j = self.h_generator.hash(token)
+            h_j = self.h_generator.hash_string(token)
             zeros_hj = Zeros.zeros(h_j)
             if zeros_hj >= self.z:
-                g_j = self.g_generator.hash(token) 
+                g_j = self.g_generator.hash_string(token) 
                 self.B.add((g_j, zeros_hj))
 
                 while len(self.B) >= self.c / (self.epsilon ** 2):
