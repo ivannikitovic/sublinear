@@ -1,7 +1,7 @@
 from typing import List
 from sublinear.utils.hash_generator import HashGenerator
 
-class AMSF2Estimate():
+class AMSSketch1:
     """
     AMS-F2-Estimate (also known as the Alon-Matias-Szegedy algorithm) is a 
     streaming algorithm for estimating the second moment of a data stream.
@@ -27,7 +27,6 @@ class AMSF2Estimate():
             Maximum length of the input elements, used for generating hash functions.
         """
         self.n = n
-
         self.z = 0
 
         self.h_generator = HashGenerator(self.n, max_input_length, m=2)
@@ -43,7 +42,7 @@ class AMSF2Estimate():
             Stream of objects represented as a list.
         """
         for a_j in stream:
-            self.z += (-1 if self.h_generator.hash(a_j) == 0 else 1)
+            self.z += (-1 if self.h_generator.hash_integer(a_j) == 0 else 1)
 
     def get_estimate(self) -> int:
         """
