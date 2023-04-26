@@ -1,5 +1,5 @@
 from collections import Counter
-from sublinear.second_moment.ams_1.ams_sketch_1 import AMSSketch1
+from sublinear.second_moment.ams.ams_sketch_1 import AMSSketch1
 
 def test_ams_1():
     # Create a test stream

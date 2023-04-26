@@ -60,7 +60,7 @@ class HashGenerator():
 
         """
         self.z = [random.randint(0, self.p - 1) for i in range(self.k)]
-        return self.z
+        return self
 
     def hash_string(self, s: str) -> int:
         """
