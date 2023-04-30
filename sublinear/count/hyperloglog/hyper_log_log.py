@@ -30,7 +30,7 @@ class HyperLogLog:
             Number of bits for bucket address.
         """
         self.b = b
-        self.m = 1 << b
+        self.m = 2 ** self.b
         self.alpha = self._calculate_alpha()
         self.M = [0] * self.m
 
@@ -49,7 +49,8 @@ class HyperLogLog:
             return 0.697
         if self.m == 64:
             return 0.709
-        return 0.7213 / (1 + 1.079 / self.m)
+        if self.m >= 128:
+            return 0.7213 / (1 + 1.079 / self.m)
 
     def _hash(self, item: str) -> int:
         """
@@ -127,7 +128,7 @@ class HyperLogLog:
             Estimated cardinality of the set.
         """
         Z = 1 / sum([2 ** -Mj for Mj in self.M])
-        E = self.alpha * self.m ** 2 * Z
+        E = self.alpha * (self.m ** 2) * Z
 
         # Apply small range correction
         if E <= 2.5 * self.m:
@@ -137,8 +138,11 @@ class HyperLogLog:
             else:
                 E_star = E
 
-            # Apply large range correction
-            if E > (1 / 30) * (2 ** 32):
-                E_star = -2 ** 32 * math.log(1 - E / 2 ** 32)
+        # No correction for intermediate range
+        E_star = E
 
-            return E_star
+        # Apply large range correction
+        if E > (1 / 30) * (2 ** 32):
+            E_star = (-2 ** 32) * math.log(1 - E / (2 ** 32))
+
+        return E_star
