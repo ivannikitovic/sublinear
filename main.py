@@ -15,8 +15,8 @@ if __name__ == "__main__":
     # test_hg_int()
 
     # test_bjkst()
-    test_bjkst_plus()
-    # test_adv_robust_1()
+    # test_bjkst_plus()
+    test_adv_robust_1()
     # test_cms_1()
     # test_cms_2()
     # test_mgs()

@@ -28,7 +28,7 @@ class SketchSwitch:
             The probability bound for the approximation.
 
         m: int
-            Number of copies of A.
+            Length of stream.
 
         n: int
             Size of the input universe.
@@ -63,7 +63,6 @@ class SketchSwitch:
             if self.algorithms[self.index - 1].estimate_distinct_elements() >= (1 + self.epsilon / 2) * self.estimate:
                 self.estimate = self.algorithms[self.index - 1].estimate_distinct_elements()
                 self.index += 1
-                print(self.index)
 
     def get_estimate(self) -> int:
         """
