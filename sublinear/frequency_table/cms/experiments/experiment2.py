@@ -1,6 +1,6 @@
 # Experiment 2 (Romeo and Juliet)
 
-from ..cms_text import CMS_Text
+from .cms_text import CMS_Text
 import os
 
 def test_cms_2():

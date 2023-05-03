@@ -2,7 +2,7 @@ from math import ceil
 import math
 import re
 from matplotlib import pyplot as plt
-from .count_min_sketch import CountMinSketch
+from ..count_min_sketch import CountMinSketch
 
 class CMS_Text():
 
@@ -94,24 +94,22 @@ class CMS_Text():
         print(f"Number of words, total: {N}")
         print()
 
-        w = ceil(math.e / self.epsilon)
-        print(f"width: {w}")
+        cms = CountMinSketch(self.epsilon, self.delta)
 
-        h = ceil(math.log(1 / self.delta))
-        print(f"height: {h}")
+        print(f"width: {cms.K}")
+        print(f"height: {cms.N}")
 
         print()
 
         # estimate less than epsilon * N with probability 1 - delta:
 
-        self.err1 = 2 * N / w
+        self.err1 = 2 * N / cms.K
         self.err2 = self.epsilon * N
 
         print(f"Markov In.: error less than {self.err1} with probability: 0.5")
         print(f"CMS Theory: error less than {self.err2} with probability: {1 - self.delta}")
         print()
 
-        cms = CountMinSketch(w, h) # 272 * 3
         cms.process_stream(self.corpus)
         cms.get_freq(self.corpus)
 

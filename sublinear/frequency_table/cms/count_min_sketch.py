@@ -1,7 +1,8 @@
+from math import ceil, e, log
 from typing import List
 from ...utils.hash_generator import HashGenerator
 
-class CountMinSketch():
+class CountMinSketch:
     """
     The count-min sketch (CMS) is a probabilistic data structure
     that serves as a frequency table of events in a stream of data.
@@ -14,9 +15,37 @@ class CountMinSketch():
     S. Muthu Muthukrishnan and described by them in a 2005 paper.
     """
 
-    def __init__(self, K: int, N: int, i_dim: int = 128, i_len: int = 32) -> None:
+    def __init__(self, epsilon: float, delta: float, i_dim: int = 128, i_len: int = 32) -> None:
         """
         Initializes Count-Min Sketch class.
+
+        Parameters
+        ----------
+        epsilon: float
+            Epsilon from the epsilon-delta definition of the CMS.
+
+        delta: float
+            Delta from the epsilon-delta definition of the CMS.
+
+        i_dim: integer, optional
+            Input range.
+            (e.g. for ASCII: n == 128)
+
+        i_len: integer, optional
+            Input length.
+
+        """
+        self.epsilon = epsilon
+        self.delta = delta
+
+        K = ceil(e / self.epsilon)
+        N = ceil(log(1 / self.delta))
+
+        self.create_sketch(K, N, i_dim=i_dim, i_len=i_len)
+
+    def create_sketch(self, K: int, N: int, i_dim: int, i_len: int) -> None:
+        """
+        Creates the CMS table.
 
         Parameters
         ----------
@@ -26,11 +55,11 @@ class CountMinSketch():
         N: integer
             Number of hash functions (height).
 
-        i_dim: integer, optional
+        i_dim: integer
             Input range.
             (e.g. for ASCII: n == 128)
 
-        i_len: integer, optional
+        i_len: integer
             Input length.
 
         """
