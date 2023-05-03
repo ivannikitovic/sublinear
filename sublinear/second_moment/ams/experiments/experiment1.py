@@ -1,12 +1,12 @@
 from collections import Counter
-from sublinear.second_moment.ams.ams_sketch_1 import AMSSketch1
+from ..ams_sketch_basic import AMSSketchBasic
 
 def test_ams_1():
     # Create a test stream
     test_stream = [i % 10 for i in range(10000)]
 
     # Initialize AMS Sketch
-    ams = AMSSketch1(n=10)
+    ams = AMSSketchBasic(n=10)
 
     # Process the stream
     ams.process_stream(test_stream)

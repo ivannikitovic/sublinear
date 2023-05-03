@@ -1,7 +1,8 @@
 from typing import List
 from sublinear.utils.hash_generator import HashGenerator
+from math import ceil
 
-class AMSSketch1:
+class AMSSketchPlus:
     """
     AMS-F2-Estimate (also known as the Alon-Matias-Szegedy algorithm) is a 
     streaming algorithm for estimating the second moment of a data stream.
@@ -9,12 +10,11 @@ class AMSSketch1:
     The second moment is defined as the sum of the squares of the frequencies 
     of distinct items in the stream.
 
-    The algorithm is based on maintaining a single counter 'z' that is updated
-    according to a random hash function, and then the second moment is estimated
-    as the square of this counter.
+    The algorithm is based on maintaining counters 'z' that are updated
+    according to their corresponding random hash functions.
     """
 
-    def __init__(self, n: int) -> None:
+    def __init__(self, n: int, epsilon: float) -> None:
         """
         Initializes the AMS-F2-Estimate class.
 
@@ -22,12 +22,15 @@ class AMSSketch1:
         ----------
         n: int
             Size of the input universe.
+
+        epsilon: float
+            Approximation error factor.
         """
         self.n = n
-        self.z = 0
+        self.k = ceil(18 / epsilon)
 
-        self.h_generator = HashGenerator(self.n, k=4, m=2)
-        self.h = self.h_generator.generate_hash_function()
+        self.z = [0 for _ in range(self.k)]
+        self.y = [HashGenerator(self.n, k=4, m=2).generate_hash_function() for _ in range(self.k)]
 
     def process_stream(self, stream: List[object]) -> None:
         """
@@ -39,7 +42,8 @@ class AMSSketch1:
             Stream of objects represented as a list.
         """
         for a_j in stream:
-            self.z += (-1 if self.h_generator.hash_integer(a_j) == 0 else 1)
+            self.z = [self.z[i] + (-1 if self.y[i].hash_integer(a_j) == 0 else 1) for i in range(self.k)]
+            
 
     def get_estimate(self) -> int:
         """
@@ -50,4 +54,4 @@ class AMSSketch1:
         int
             Estimated second moment of the stream.
         """
-        return self.z ** 2
+        return int(sum(map(lambda x: x**2, self.z)) / self.k)

@@ -1,13 +1,14 @@
 from collections import Counter
-from ..ams_sketch_plus import AMSSketchPlus
+from ..ams_sketch_plus_plus import AMSSketchPlusPlus
 
-def test_ams_2():
+def test_ams_3():
     # Create a test stream
     test_stream = [i % 10 for i in range(10000)]
 
     # Initialize AMS Sketch 2
     epsilon = 0.1
-    ams2 = AMSSketchPlus(10, epsilon)
+    delta = 0.1
+    ams2 = AMSSketchPlusPlus(10, epsilon, delta)
 
     # Process the stream
     ams2.process_stream(test_stream)

@@ -6,6 +6,7 @@ from sublinear.distinct_elements.hyperloglog.experiments.experiment1 import test
 from sublinear.heavy_hitters.mgs.experiments.experiment1 import test_mgs
 from sublinear.second_moment.ams.experiments.experiment1 import test_ams_1
 from sublinear.second_moment.ams.experiments.experiment2 import test_ams_2
+from sublinear.second_moment.ams.experiments.experiment3 import test_ams_3
 from sublinear.utils.experiments.experiment1 import test_hg_int
 
 if __name__ == "__main__":
@@ -16,6 +17,7 @@ if __name__ == "__main__":
     # test_cms_2()
     # test_mgs()
     # test_ams_1()
-    test_ams_2()
+    # test_ams_2()
+    test_ams_3()
     # test_morris()
     # test_hll()

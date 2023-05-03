@@ -18,7 +18,7 @@ Here is the list of the currently implemented streaming algorithms.
 
 ### F2 Estimation (Estimate of Second Moment)
 
-- AMS Sketch [5]
+- AMS Sketch (basic, plus, plus plus) [5]
 
 ### Frequency Table Estimation
 
