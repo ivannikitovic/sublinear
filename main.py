@@ -12,10 +12,10 @@ from sublinear.utils.experiments.experiment1 import test_hg_int
 if __name__ == "__main__":
     # test_hg_int()
 
-    # test_bjkst()
+    test_bjkst()
     # test_cms_1()
     # test_cms_2()
-    test_mgs()
+    # test_mgs()
     # test_ams_1()
     # test_ams_2()
     # test_ams_3()

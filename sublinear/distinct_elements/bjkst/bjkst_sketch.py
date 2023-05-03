@@ -14,7 +14,7 @@ class BJKSTSketch:
     The BJKST algorithm was invented by Bar-Yossef, Jayram, Kumar, Sivakumar, and Trevisan.
     """
 
-    def __init__(self, n: int, b: float, c: float, epsilon: float, max_input_length: int = 64):
+    def __init__(self, n: int, epsilon: float, b: float = 10, max_input_length: int = 64, c: float = 576):
         """
         Initializes BJKST Sketch class.
 

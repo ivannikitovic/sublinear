@@ -5,11 +5,9 @@ from ..bjkst_sketch import BJKSTSketch
 def test_bjkst():
 
     n = 128
-    b = 10
-    c = 576
     epsilon = 0.1
 
-    bjkst = BJKSTSketch(n, b, c, epsilon)
+    bjkst = BJKSTSketch(n, epsilon)
 
     test1 = []
 
