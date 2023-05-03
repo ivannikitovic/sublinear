@@ -16,19 +16,19 @@ Here is the list of the currently implemented streaming algorithms.
 
 - Morris (basic, plus, plus plus) [3][4]
 
-## F2 Estimation (Estimate of Second Moment)
+### F2 Estimation (Estimate of Second Moment)
 
 - AMS Sketch [5]
 
-## Frequency Table Estimation
+### Frequency Table Estimation
 
 - Count Min Sketch [6]
 
-## Heavy Hitters
+### Heavy Hitters
 
 - Misra-Gries Sketch [7]
 
-## Other
+### Other
 
 - K Independent Hash Function [8]
 
