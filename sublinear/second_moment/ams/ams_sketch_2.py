@@ -1,5 +1,6 @@
 from typing import List
 from sublinear.utils.hash_generator import HashGenerator
+from math import ceil
 
 class AMSSketch2:
     """
@@ -13,7 +14,7 @@ class AMSSketch2:
     according to their corresponding random hash functions.
     """
 
-    def __init__(self, n: int, k: int) -> None:
+    def __init__(self, n: int, epsilon: float) -> None:
         """
         Initializes the AMS-F2-Estimate class.
 
@@ -22,11 +23,11 @@ class AMSSketch2:
         n: int
             Size of the input universe.
 
-        k: int
-            Number of hash function copies.
+        epsilon: float
+            Approximation error factor.
         """
         self.n = n
-        self.k = k
+        self.k = ceil(18 / epsilon)
 
         self.z = [0 for _ in range(self.k)]
         self.y = [HashGenerator(self.n, k=4, m=2).generate_hash_function() for _ in range(self.k)]

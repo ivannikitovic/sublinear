@@ -16,6 +16,6 @@ if __name__ == "__main__":
     # test_cms_2()
     # test_mgs()
     # test_ams_1()
-    # test_ams_2()
+    test_ams_2()
     # test_morris()
-    test_hll()
+    # test_hll()

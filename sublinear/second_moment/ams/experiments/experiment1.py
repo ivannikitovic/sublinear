@@ -6,7 +6,7 @@ def test_ams_1():
     test_stream = [i % 10 for i in range(10000)]
 
     # Initialize AMS Sketch
-    ams = AMSSketch1(n=len(test_stream))
+    ams = AMSSketch1(n=10)
 
     # Process the stream
     ams.process_stream(test_stream)

@@ -1,5 +1,4 @@
 from collections import Counter
-import math
 from sublinear.second_moment.ams.ams_sketch_2 import AMSSketch2
 
 def test_ams_2():
@@ -8,8 +7,7 @@ def test_ams_2():
 
     # Initialize AMS Sketch 2
     epsilon = 0.1
-    k = math.ceil(18 / epsilon)
-    ams2 = AMSSketch2(len(test_stream), k)
+    ams2 = AMSSketch2(10, epsilon)
 
     # Process the stream
     ams2.process_stream(test_stream)
