@@ -4,7 +4,8 @@ from ..misra_gries_sketch import MisraGriesSketch
 
 def test_mgs():
     
-    mgs = MisraGriesSketch(10)  # Frequency threshold 10
+    epsilon = 0.5
+    mgs = MisraGriesSketch(epsilon)  # Frequency threshold 50%
 
     test1 = []
 

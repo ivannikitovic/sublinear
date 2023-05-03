@@ -1,4 +1,5 @@
 from typing import List
+from math import ceil
 
 class MisraGriesSketch:
     """
@@ -13,17 +14,17 @@ class MisraGriesSketch:
     David Gries and described by them in a paper.
     """
 
-    def __init__(self, k: int):
+    def __init__(self, epsilon: float):
         """
         Initializes Misra-Gries Sketch class.
 
         Parameters
         ----------
-        k: int
-            Frequency threshold for heavy hitters.
+        epsilon: float
+            Finds all items that occur more than ϵn times.
 
         """
-        self.k = k
+        self.k = ceil(1 / epsilon)
         self.sketch = {}
         self.d = 0
 
