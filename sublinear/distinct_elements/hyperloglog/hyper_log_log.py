@@ -130,6 +130,9 @@ class HyperLogLog:
         Z = 1 / sum([2 ** -Mj for Mj in self.M])
         E = self.alpha * (self.m ** 2) * Z
 
+        # No correction for intermediate range
+        E_star = E
+
         # Apply small range correction
         if E <= 2.5 * self.m:
             V = self.M.count(0)
@@ -137,9 +140,6 @@ class HyperLogLog:
                 E_star = self.m * math.log(self.m / V)
             else:
                 E_star = E
-
-        # No correction for intermediate range
-        E_star = E
 
         # Apply large range correction
         if E > (1 / 30) * (2 ** 32):

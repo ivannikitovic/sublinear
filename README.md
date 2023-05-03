@@ -10,9 +10,9 @@ Here is the list of the currently implemented streaming algorithms.
 
 - BJKST Sketch [1]
 
-### F1 Estimation (Length of Stream)
-
 - HyperLogLog [2]
+
+### F1 Estimation (Length of Stream)
 
 - Morris (basic, plus, plus plus) [3][4]
 
