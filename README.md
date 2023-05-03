@@ -8,7 +8,7 @@ Here is the list of the currently implemented streaming algorithms.
 
 ### F0 Estimation (Count of Distinct Elements)
 
-- BJKST Sketch [1]
+- BJKST Sketch (basic, plus, adversarially robust) [1]
 
 - HyperLogLog [2]
 
