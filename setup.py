@@ -1,26 +1,25 @@
 from setuptools import setup, find_packages
 
+# read the contents of your README file
+from pathlib import Path
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
+
 setup(
-    name="Sublinear",
+    name="sublinear",
     version="0.1.0",
-    description="Implementation of Count-Min Sketch using Pyhon.",
+    description="Python library implementing a subset of streaming algorithms. Includes variations of these algorithms (e.g. adversarially robust), as well as support for multiple data types.",
+    long_description_content_type='text/markdown',
+    long_description=long_description,
+    license="MIT",
     author="Ivan Nikitovic",
     author_email="ivan.bnikitovic@gmail.com",
+    url="https://github.com/ivannikitovic/sublinear",
     packages=find_packages(),
-    classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-    ],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     include_package_data=True,
     install_requires=[
-        # Add your project's dependencies here
+        'numpy',
+        'matplotlib',
     ],
 )
