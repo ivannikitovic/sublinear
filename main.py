@@ -1,4 +1,6 @@
 from sublinear.count.morris.experiments.experiment1 import test_morris
+from sublinear.distinct_elements.bjkst.experiments.experiment2 import test_bjkst_plus
+from sublinear.distinct_elements.sketch_switching.experiments.experiment1 import test_adv_robust_1
 from sublinear.frequency_table.cms.experiments.experiment1 import test_cms_1
 from sublinear.frequency_table.cms.experiments.experiment2 import test_cms_2
 from sublinear.distinct_elements.bjkst.experiments.experiment1 import test_bjkst
@@ -13,6 +15,8 @@ if __name__ == "__main__":
     # test_hg_int()
 
     # test_bjkst()
+    # test_bjkst_plus()
+    # test_adv_robust_1()
     # test_cms_1()
     # test_cms_2()
     # test_mgs()

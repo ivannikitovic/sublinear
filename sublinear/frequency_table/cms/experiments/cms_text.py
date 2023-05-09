@@ -1,5 +1,4 @@
 from math import ceil
-import math
 import re
 from matplotlib import pyplot as plt
 from ..count_min_sketch import CountMinSketch
