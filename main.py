@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     # test_bjkst()
     # test_bjkst_plus()
-    test_adv_robust_1()
+    # test_adv_robust_1()
     # test_cms_1()
     # test_cms_2()
     # test_mgs()
@@ -24,4 +24,4 @@ if __name__ == "__main__":
     # test_ams_2()
     # test_ams_3()
     # test_morris()
-    # test_hll()
+    test_hll()

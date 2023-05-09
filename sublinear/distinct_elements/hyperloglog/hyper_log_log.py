@@ -2,6 +2,8 @@ import hashlib
 import math
 from typing import List
 
+from sublinear.utils.hash_generator import HashGenerator
+
 class HyperLogLog:
     """
     HyperLogLog is a probabilistic algorithm for the count-distinct problem,
@@ -34,6 +36,9 @@ class HyperLogLog:
         self.alpha = self._calculate_alpha()
         self.M = [0] * self.m
 
+        self.h_generator = HashGenerator(128, 64, m=2**32)
+        self.h = self.h_generator.generate_hash_function()
+
     def _calculate_alpha(self) -> float:
         """
         Calculate correction factor alpha based on the number of buckets (m).
@@ -51,24 +56,6 @@ class HyperLogLog:
             return 0.709
         if self.m >= 128:
             return 0.7213 / (1 + 1.079 / self.m)
-
-    def _hash(self, item: str) -> int:
-        """
-        Hashes the input item using SHA-1 hash function.
-
-        Parameters
-        ----------
-        item : str
-            Input item to be hashed.
-
-        Returns
-        -------
-        int
-            Hash value of the input item.
-        """
-        sha1 = hashlib.sha1()
-        sha1.update(item.encode())
-        return int(sha1.hexdigest(), 16)
 
     def _get_bucket_index(self, hash_value: int) -> int:
         """
@@ -102,7 +89,7 @@ class HyperLogLog:
             Rank of the first 1-bit.
         """
         binary = format(hash_value, "032b")
-        return binary.find("1") + 1
+        return binary[self.b:].find("1") + 1
 
     def add(self, item: str) -> None:
         """
@@ -113,7 +100,7 @@ class HyperLogLog:
         item : str
             Input item to be added.
         """
-        hash_value = self._hash(item)
+        hash_value = self.h_generator.hash_string(item) 
         j = self._get_bucket_index(hash_value)
         w = hash_value >> self.b
         self.M[j] = max(self.M[j], self._get_rho(w))
