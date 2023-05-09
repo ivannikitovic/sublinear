@@ -2,7 +2,7 @@
 
 Python library implementing a subset of streaming algorithms. Includes variations of these algorithms (e.g. adversarially robust), as well as support for multiple data types.
 
-## ⚡️ Algorithms
+## :zap: Algorithms
 
 Here is the list of the currently implemented streaming algorithms.
 
@@ -32,7 +32,7 @@ Here is the list of the currently implemented streaming algorithms.
 
 - K Independent Hash Function [8]
 
-## 📖 Bibliography
+## :book: Bibliography
 
 [1] Bar-Yossef, Ziv, et al. "Counting distinct elements in a data stream." Randomization and Approximation Techniques in Computer Science. Springer Berlin Heidelberg, 2002.
 
