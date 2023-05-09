@@ -2,6 +2,10 @@
 
 Python library implementing a subset of streaming algorithms. Includes variations of these algorithms (e.g. adversarially robust), as well as support for multiple data types.
 
+## :computer: Installation
+
+``pip install sublinear``
+
 ## :zap: Algorithms
 
 Here is the list of the currently implemented streaming algorithms.
