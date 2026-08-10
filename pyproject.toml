@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sublinear-algorithms"
+dynamic = ["version"]
+description = "Python library implementing a subset of streaming algorithms. Includes variations of these algorithms (e.g. adversarially robust), as well as support for multiple data types."
+readme = { file = "README.md", content-type = "text/markdown" }
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Ivan Nikitovic", email = "ivan.bnikitovic@gmail.com" }]
+requires-python = ">=3.7"
+keywords = [
+    "streaming-algorithms",
+    "sublinear",
+    "sketches",
+    "count-min-sketch",
+    "hyperloglog",
+    "heavy-hitters",
+    "distinct-elements",
+    "data-streams",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "numpy",
+    "matplotlib",
+]
+
+[project.urls]
+Homepage = "https://github.com/ivannikitovic/sublinear"
+Repository = "https://github.com/ivannikitovic/sublinear"
+Issues = "https://github.com/ivannikitovic/sublinear/issues"
+
+[tool.setuptools.dynamic]
+version = { attr = "sublinear.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["sublinear*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md"]

@@ -1,10 +1,41 @@
 # sublinear
 
+[![PyPI](https://img.shields.io/pypi/v/sublinear-algorithms.svg)](https://pypi.org/project/sublinear-algorithms/)
+[![Python versions](https://img.shields.io/pypi/pyversions/sublinear-algorithms.svg)](https://pypi.org/project/sublinear-algorithms/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Python library implementing a subset of streaming algorithms. Includes variations of these algorithms (e.g. adversarially robust), as well as support for multiple data types.
 
 ## :computer: Installation
 
-``pip install sublinear``
+``pip install sublinear-algorithms``
+
+The import namespace is unchanged:
+
+```python
+import sublinear
+from sublinear.frequency_table.cms.count_min_sketch import CountMinSketch
+```
+
+## :warning: Note on the PyPI distribution name
+
+Versions **up to and including 0.1.0** were distributed on PyPI as
+[`sublinear`](https://pypi.org/project/sublinear/). The `sublinear` PyPI name has since
+been handed over to an unrelated project, so **starting with version 0.2.0** this library
+is distributed as
+[`sublinear-algorithms`](https://pypi.org/project/sublinear-algorithms/).
+
+Nothing else changed: same repository, same git history, same source code, and the same
+`import sublinear` namespace.
+
+| | Distribution name | Versions |
+| --- | --- | --- |
+| Old | `sublinear` | 0.1.0 only — no longer maintained here |
+| New | `sublinear-algorithms` | 0.2.0 and later |
+
+> **Do not install both `sublinear` and `sublinear-algorithms` into the same environment.**
+> Both provide a top-level `sublinear` module, and Python packaging has no way to detect
+> that collision — they will silently overwrite each other's files.
 
 ## :zap: Algorithms
 
